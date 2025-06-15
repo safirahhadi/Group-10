@@ -15,8 +15,3 @@ COPY --from=build /app/dist/*.war /usr/local/tomcat/webapps/ROOT.war
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
 
-# Copy the jar to your container
-COPY org-netbeans-modules-java-j2seproject-copylibstask.jar /app/lib/
-
-# Run Ant with the classpath
-RUN ant -buildfile build.xml -Dlibs.CopyLibs.classpath=/app/lib/org-netbeans-modules-java-j2seproject-copylibstask.jar
