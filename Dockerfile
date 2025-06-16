@@ -15,3 +15,8 @@ COPY --from=build /app/dist/*.war /usr/local/tomcat/webapps/ROOT.war
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
 
+# Copy the CopyLibs jar from your local system (must be in the build context)
+COPY org-netbeans-modules-java-j2seproject-copylibstask.jar /copylibs/copylibs.jar
+
+# Build with Ant using the custom classpath
+RUN ant -Dlibs.CopyLibs.classpath=/copylibs/copylibs.jar
